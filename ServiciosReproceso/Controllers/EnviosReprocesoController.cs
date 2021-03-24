@@ -1,12 +1,9 @@
-﻿using System;
+﻿using ServiciosReproceso.Models;
+using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Net;
-using System.Net.Http;
-using System.Web.Http;
 using System.Data;
 using System.Data.SqlClient;
-using ServiciosReproceso.Models;
+using System.Web.Http;
 
 namespace ServiciosReproceso.Controllers
 {
@@ -27,13 +24,13 @@ namespace ServiciosReproceso.Controllers
                 sqlcommand.CommandType = CommandType.StoredProcedure;
 
                 sqlcommand.Parameters.Add("@idorder", SqlDbType.Int).Value = idorden;
-           
+
                 var dr = sqlcommand.ExecuteReader();
-             
+
                 while (dr.Read())
-                {                  
+                {
                     var obj = new Reproceso
-                    {                     
+                    {
                         idOrder = Convert.ToInt32(dr["Id_Order"].ToString()),
                         talla = dr["Size"].ToString(),
                         totalPorTalla = Convert.ToInt32(dr["Enviado"].ToString()),
@@ -48,7 +45,7 @@ namespace ServiciosReproceso.Controllers
 
         // GET: api/EnviosReproceso
         [HttpGet]
-        public List<Reproceso> Get(int idorden,string type)
+        public List<Reproceso> Get(int idorden, string type)
         {
             var conectionString = Coneccion.Cadena.conexion;
 
@@ -83,10 +80,10 @@ namespace ServiciosReproceso.Controllers
 
         // POST: api/EnviosReproceso
         [HttpPost]
-        public string Post([FromBody]Reproceso data)
+        public string Post([FromBody] Reproceso data)
         {
             var config = Coneccion.Cadena.conexion;
-      
+
             using (SqlConnection cn = new SqlConnection(config))
             {
                 cn.Open();
@@ -134,7 +131,7 @@ namespace ServiciosReproceso.Controllers
         }
 
         // PUT: api/EnviosReproceso/5
-        public void Put(int id, [FromBody]string value)
+        public void Put(int id, [FromBody] string value)
         {
         }
 

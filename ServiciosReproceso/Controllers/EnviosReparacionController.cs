@@ -1,12 +1,9 @@
-﻿using System;
+﻿using ServiciosReproceso.Models;
+using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Net;
-using System.Net.Http;
-using System.Web.Http;
 using System.Data;
 using System.Data.SqlClient;
-using ServiciosReproceso.Models;
+using System.Web.Http;
 
 namespace ServiciosReproceso.Controllers
 {
@@ -29,7 +26,7 @@ namespace ServiciosReproceso.Controllers
                 sqlcommand.Parameters.Add("@idorder", SqlDbType.Int).Value = idorden;
 
                 var dr = sqlcommand.ExecuteReader();
-              
+
                 while (dr.Read())
                 {
                     var obj = new Reparacion
@@ -96,12 +93,12 @@ namespace ServiciosReproceso.Controllers
                 command.CommandType = CommandType.StoredProcedure;
 
                 command.Parameters.Add("@idOrder", SqlDbType.Int).Value = data.idOrder;
-                command.Parameters.Add("@talla", SqlDbType.NChar,10).Value = data.talla;
+                command.Parameters.Add("@talla", SqlDbType.NChar, 10).Value = data.talla;
                 command.Parameters.Add("@idlinea", SqlDbType.Int).Value = data.idLinea;
                 command.Parameters.Add("@totalXtalla", SqlDbType.Int).Value = data.totalPorTalla;
                 command.Parameters.Add("@cantdev", SqlDbType.Int).Value = data.cantidadDevolucion;
-                command.Parameters.Add("@observacion", SqlDbType.NVarChar,1000).Value = data.observacion;
-                command.Parameters.Add("@usuario", SqlDbType.NChar,20).Value = data.usuario;
+                command.Parameters.Add("@observacion", SqlDbType.NVarChar, 1000).Value = data.observacion;
+                command.Parameters.Add("@usuario", SqlDbType.NChar, 20).Value = data.usuario;
 
                 command.ExecuteNonQuery();
 
@@ -112,7 +109,7 @@ namespace ServiciosReproceso.Controllers
 
         // GET: api/EnviosReparacion
         [HttpPost]
-        public string Post([FromBody] Reparacion data,int id)
+        public string Post([FromBody] Reparacion data, int id)
         {
             var config = Coneccion.Cadena.conexion;
 
@@ -126,8 +123,8 @@ namespace ServiciosReproceso.Controllers
                 command.Parameters.Add("@idObjectRepa", SqlDbType.Int).Value = id;// data.objectIdReparaciones;
                 command.Parameters.Add("@cantidadRet ", SqlDbType.Int).Value = data.cantidadDevolucion;
                 command.Parameters.Add("@observacion ", SqlDbType.NVarChar).Value = data.observacion;
-                command.Parameters.Add("@usuario ", SqlDbType.NChar,20).Value = data.usuario;
-              
+                command.Parameters.Add("@usuario ", SqlDbType.NChar, 20).Value = data.usuario;
+
                 command.ExecuteNonQuery();
 
                 return "Ok";

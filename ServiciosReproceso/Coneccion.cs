@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Configuration;
-using System.Linq;
-using System.Web;
+﻿using System.Configuration;
 
 namespace ServiciosReproceso
 {
@@ -12,7 +8,8 @@ namespace ServiciosReproceso
         private static Coneccion cadena = null;
         public string conexion;
 
-        protected Coneccion() {
+        protected Coneccion()
+        {
             this.conexion = ConfigurationManager.ConnectionStrings["cadenaconexion"].ConnectionString;
         }
 
@@ -20,7 +17,7 @@ namespace ServiciosReproceso
         {
             get
             {
-                if (cadena==null)
+                if (cadena == null)
                 {
                     cadena = new Coneccion();
 
@@ -29,6 +26,6 @@ namespace ServiciosReproceso
                 return cadena;
             }
         }
-    } 
+    }
 
 }

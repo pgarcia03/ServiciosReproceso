@@ -1,12 +1,9 @@
-﻿using System;
+﻿using ServiciosReproceso.Models;
+using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Net;
-using System.Net.Http;
-using System.Web.Http;
 using System.Data;
 using System.Data.SqlClient;
-using ServiciosReproceso.Models;
+using System.Web.Http;
 
 namespace ServiciosReproceso.Controllers
 {
@@ -15,10 +12,10 @@ namespace ServiciosReproceso.Controllers
         // GET: api/Porders/pre
         [HttpGet]
         public List<Porder> Get(string pre)
-        {           
+        {
             var conectionString = Coneccion.Cadena.conexion;
 
-            var list =new List<Porder>();
+            var list = new List<Porder>();
             using (SqlConnection cn = new SqlConnection(conectionString))
             {
                 cn.Open();
@@ -26,19 +23,20 @@ namespace ServiciosReproceso.Controllers
                 var sqlcommand = new SqlCommand("spdBuscarPo", cn);
                 sqlcommand.CommandType = CommandType.StoredProcedure;
 
-                sqlcommand.Parameters.Add("@porder",SqlDbType.NChar,15).Value=pre;
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                
+                sqlcommand.Parameters.Add("@porder", SqlDbType.NChar, 15).Value = pre;
+
                 var dr = sqlcommand.ExecuteReader();
 
-               
+
                 while (dr.Read())
                 {
-                    var obj = new Porder {
+                    var obj = new Porder
+                    {
                         idCorte = Convert.ToInt32(dr["Id_Order"].ToString()),
                         corte = dr["Porder"].ToString(),
                         estilo = dr["Style"].ToString(),
-                        cantidad= Convert.ToInt32(dr["Quantity"].ToString()),
-                        washed=Convert.ToBoolean(dr["Washed"])
+                        cantidad = Convert.ToInt32(dr["Quantity"].ToString()),
+                        washed = Convert.ToBoolean(dr["Washed"])
                     };
 
                     list.Add(obj);
@@ -63,7 +61,7 @@ namespace ServiciosReproceso.Controllers
 
                 var sqlcommand = new SqlCommand("select id_linea as id,numero as linea from Linea where numero not like '%-%' order by convert(float, numero) asc", cn);
                 sqlcommand.CommandType = CommandType.Text;
-                
+
                 var dr = sqlcommand.ExecuteReader();
 
 
@@ -73,7 +71,7 @@ namespace ServiciosReproceso.Controllers
                     {
                         id = Convert.ToInt32(dr["id"].ToString()),
                         linea = dr["linea"].ToString()
-                      
+
                     };
 
                     list.Add(obj);
