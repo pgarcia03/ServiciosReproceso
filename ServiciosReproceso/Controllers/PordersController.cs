@@ -7,13 +7,15 @@ using System.Web.Http;
 
 namespace ServiciosReproceso.Controllers
 {
+    [Authorize]
     public class PordersController : ApiController
     {
         // GET: api/Porders/pre
         [HttpGet]
         public List<Porder> Get(string pre)
         {
-            var conectionString = Coneccion.Cadena.conexion;
+           // var conectionString = Coneccion.Cadena.conexion;
+            var conectionString = CreadorConection.Creador(CreadorConection.Auditoria).conectionstring();
 
             var list = new List<Porder>();
             using (SqlConnection cn = new SqlConnection(conectionString))
@@ -52,7 +54,8 @@ namespace ServiciosReproceso.Controllers
         [HttpGet]
         public List<Linea> Get()
         {
-            var conectionString = Coneccion.Cadena.conexion;
+           // var conectionString = Coneccion.Cadena.conexion;
+            var conectionString = CreadorConection.Creador(CreadorConection.Auditoria).conectionstring();
 
             var list = new List<Linea>();
             using (SqlConnection cn = new SqlConnection(conectionString))

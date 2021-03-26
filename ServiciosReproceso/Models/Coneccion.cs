@@ -6,6 +6,7 @@ namespace ServiciosReproceso
     public class Coneccion
     {
         private static Coneccion cadena = null;
+      
         public string conexion;
 
         protected Coneccion()
@@ -20,12 +21,13 @@ namespace ServiciosReproceso
                 if (cadena == null)
                 {
                     cadena = new Coneccion();
-
                 }
 
                 return cadena;
             }
         }
+      
     }
 
 }
+

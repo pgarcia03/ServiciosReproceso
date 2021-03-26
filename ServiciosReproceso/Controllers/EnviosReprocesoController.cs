@@ -7,13 +7,15 @@ using System.Web.Http;
 
 namespace ServiciosReproceso.Controllers
 {
+    [Authorize]
     public class EnviosReprocesoController : ApiController
     {
         // GET: api/EnviosReproceso
         [HttpGet]
         public List<Reproceso> Get(int idorden)
         {
-            var conectionString = Coneccion.Cadena.conexion;
+            //var conectionString = Coneccion.Cadena.conexion;
+            var conectionString = CreadorConection.Creador(CreadorConection.Auditoria).conectionstring();
 
             var list = new List<Reproceso>();
             using (SqlConnection cn = new SqlConnection(conectionString))
@@ -47,7 +49,8 @@ namespace ServiciosReproceso.Controllers
         [HttpGet]
         public List<Reproceso> Get(int idorden, string type)
         {
-            var conectionString = Coneccion.Cadena.conexion;
+            // var conectionString = Coneccion.Cadena.conexion;
+            var conectionString = CreadorConection.Creador(CreadorConection.Auditoria).conectionstring();
 
             var list = new List<Reproceso>();
             using (SqlConnection cn = new SqlConnection(conectionString))
@@ -82,9 +85,10 @@ namespace ServiciosReproceso.Controllers
         [HttpPost]
         public string Post([FromBody] Reproceso data)
         {
-            var config = Coneccion.Cadena.conexion;
+            //var config = Coneccion.Cadena.conexion;
+            var conectionString = CreadorConection.Creador(CreadorConection.Auditoria).conectionstring();
 
-            using (SqlConnection cn = new SqlConnection(config))
+            using (SqlConnection cn = new SqlConnection(conectionString))
             {
                 cn.Open();
 
@@ -109,9 +113,10 @@ namespace ServiciosReproceso.Controllers
         [HttpPost]
         public string Post([FromBody] Reproceso data, int id)
         {
-            var config = Coneccion.Cadena.conexion;
+            //var config = Coneccion.Cadena.conexion;
+            var conectionString = CreadorConection.Creador(CreadorConection.Auditoria).conectionstring();
 
-            using (SqlConnection cn = new SqlConnection(config))
+            using (SqlConnection cn = new SqlConnection(conectionString))
             {
                 cn.Open();
 

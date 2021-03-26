@@ -1,4 +1,5 @@
-﻿using System.Web.Http;
+﻿using ServiciosReproceso.Controllers;
+using System.Web.Http;
 using System.Web.Http.Cors;
 
 namespace ServiciosReproceso
@@ -14,6 +15,8 @@ namespace ServiciosReproceso
 
             // Web API routes
             config.MapHttpAttributeRoutes();
+
+            config.MessageHandlers.Add(new TokenValidationHandler());
 
             config.Routes.MapHttpRoute(
                 name: "DefaultApi",
