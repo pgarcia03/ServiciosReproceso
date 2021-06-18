@@ -7,5 +7,6 @@
         public int cantidad { get; set; }
         public string estilo { get; set; }
         public bool washed { get; set; }
+        public string descrip { get; set; }
     }
 }

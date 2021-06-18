@@ -7,7 +7,7 @@ using System.Web.Http;
 
 namespace ServiciosReproceso.Controllers
 {
-    [Authorize]
+    //[Authorize]
     public class PordersController : ApiController
     {
         // GET: api/Porders/pre
@@ -20,7 +20,7 @@ namespace ServiciosReproceso.Controllers
             var list = new List<Porder>();
             using (SqlConnection cn = new SqlConnection(conectionString))
             {
-                cn.Open();
+                cn.Open(); 
 
                 var sqlcommand = new SqlCommand("spdBuscarPo", cn);
                 sqlcommand.CommandType = CommandType.StoredProcedure;
@@ -38,7 +38,9 @@ namespace ServiciosReproceso.Controllers
                         corte = dr["Porder"].ToString(),
                         estilo = dr["Style"].ToString(),
                         cantidad = Convert.ToInt32(dr["Quantity"].ToString()),
-                        washed = Convert.ToBoolean(dr["Washed"])
+                        washed = Convert.ToBoolean(dr["Washed"]),
+                        descrip= dr["Describir"].ToString()
+                        
                     };
 
                     list.Add(obj);
@@ -89,11 +91,47 @@ namespace ServiciosReproceso.Controllers
 
 
 
-        // GET: api/Porders/5
-        //public string Get(int id)
-        //{
-        //    return "value";
-        //}
+        //  GET: api/Porders/5
+        [HttpGet]
+        [Route("api/porders/getTallas")]
+        public List<Porder> Get(int id)
+        {
+
+            var conectionString = CreadorConection.Creador(CreadorConection.Auditoria).conectionstring();
+
+            var list = new List<Porder>();
+            using (SqlConnection cn = new SqlConnection(conectionString))
+            {
+                cn.Open();
+
+                var sqlcommand = new SqlCommand("spdGetTallasUniXIdCorte", cn);
+                sqlcommand.CommandType = CommandType.StoredProcedure;
+
+                sqlcommand.Parameters.Add("@id", SqlDbType.Int).Value = id;
+
+                var dr = sqlcommand.ExecuteReader();
+
+
+                while (dr.Read())
+                {
+                    var obj = new Porder
+                    {
+                        idCorte = Convert.ToInt32(dr["unidades"].ToString()),
+                        corte = dr["Size"].ToString(),
+                      
+                    };
+
+                    list.Add(obj);
+
+                }
+
+                return list;
+
+            }
+
+           
+
+        }
 
         // POST: api/Porders
         //[HttpPost]
