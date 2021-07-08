@@ -37,7 +37,7 @@ namespace ServiciosReproceso.Controllers
                         color = dr["color"].ToString(),
                         unidadesCorte=Convert.ToInt32(dr["unidades"].ToString()),
                         disponible= Convert.ToInt32(dr["disponible"].ToString()),
-                        uniTranferencia=0
+                        uniTransferencia=0
 
                     };
 
@@ -71,7 +71,7 @@ namespace ServiciosReproceso.Controllers
                         estilo = dr["estilo"].ToString(),
                         color = dr["color"].ToString(),
                         disponible = Convert.ToInt32(dr["disponible"].ToString()),
-                        uniTranferencia=0
+                        uniTransferencia=0
 
                     };
 

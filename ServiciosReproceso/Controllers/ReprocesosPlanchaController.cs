@@ -44,7 +44,7 @@ namespace ServiciosReproceso.Controllers
                         // color = dr["color"].ToString(),
                         //unidadesCorte = Convert.ToInt32(dr["unidades"].ToString()),
                         disponible = Convert.ToInt32(dr["Total"].ToString()),
-                        // uniTranferencia = 0
+                        uniTransferencia = 0
 
                     };
 
@@ -69,7 +69,7 @@ namespace ServiciosReproceso.Controllers
           
                 var sqlcommand = new SqlCommand("spdIntexGetDetalleDisponiblePlancha", cn);
                 sqlcommand.CommandType = CommandType.StoredProcedure;
-                sqlcommand.Parameters.Add("@corte", SqlDbType.Int).Value = corte;
+                sqlcommand.Parameters.Add("@corteParam", SqlDbType.NChar,25).Value = corte;
 
 
                 var dr = sqlcommand.ExecuteReader();
@@ -79,9 +79,9 @@ namespace ServiciosReproceso.Controllers
                     var obj = new disponiblePlancha
                     {
                         // objectId = Convert.ToInt32(dr["id"].ToString()),
-                        corte = dr["PorderClient"].ToString(),
+                        corte = dr["POrderClient"].ToString(),
                         estilo = dr["estilo"].ToString(),
-                        tolereancia= dr["tolerancia"].ToString(),
+                        tolerancia= dr["tolerancia"].ToString(),
                         Waist = Convert.ToInt32(dr["Waist"].ToString()),
                         Inseam = Convert.ToInt32(dr["Inseam"].ToString()),
                         WI = Convert.ToInt32(dr["WI"].ToString()),
@@ -132,7 +132,7 @@ namespace ServiciosReproceso.Controllers
                         estilo = dr["estilo"].ToString(),
                         color = dr["color"].ToString(),
                         disponible = Convert.ToInt32(dr["Unidades"].ToString()),
-                        // uniTranferencia = 0
+                        uniTransferencia = 0
 
                     };
 
@@ -144,7 +144,7 @@ namespace ServiciosReproceso.Controllers
         }
 
         // POST: api/ReprocesosPlancha
-        public string Post([FromBody] ReprocesoPlancha data)
+        public string Post([FromBody] disponiblePlancha data)
         {
             try
             {
@@ -158,7 +158,7 @@ namespace ServiciosReproceso.Controllers
                     command.CommandType = CommandType.StoredProcedure;
 
                     command.Parameters.Add("@corteParam", SqlDbType.NVarChar).Value = data.corte;
-                    command.Parameters.Add("@unidadesParam", SqlDbType.Int).Value = data.unidades;
+                    command.Parameters.Add("@unidadesParam", SqlDbType.Int).Value = data.uniTransferencia;
 
                     command.ExecuteNonQuery();
 
@@ -180,7 +180,7 @@ namespace ServiciosReproceso.Controllers
         /// <param name="id"></param>
         /// <returns></returns>
         // POST: api/ReprocesosPlancha
-        public string Post([FromBody] ReprocesoPlancha data,int id)
+        public string Post([FromBody] disponiblePlancha data,int id)
         {
             try
             {
@@ -194,7 +194,7 @@ namespace ServiciosReproceso.Controllers
                     command.CommandType = CommandType.StoredProcedure;
 
                     command.Parameters.Add("@corteParam", SqlDbType.NVarChar).Value = data.corte;
-                    command.Parameters.Add("@unidadesParam", SqlDbType.Int).Value = data.unidades;
+                    command.Parameters.Add("@unidadesParam", SqlDbType.Int).Value = data.uniTransferencia;
 
                     command.ExecuteNonQuery();
 

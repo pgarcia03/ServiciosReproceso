@@ -20,7 +20,7 @@ namespace ServiciosReproceso.Controllers
         }
 
         // GET: api/Irregulares/5
-        public List<Irregular> Get(int id)
+        public List<Irregular> Get(string corte)
         {
             var conectionString = CreadorConection.Creador(CreadorConection.Auditoria).conectionstring();
 
@@ -29,10 +29,10 @@ namespace ServiciosReproceso.Controllers
             {
                 cn.Open();
 
-                var sqlcommand = new SqlCommand("spdGetListaIrregularesXidCorte", cn);
+                var sqlcommand = new SqlCommand("spdGetListaIrregularesXCorteCliente", cn);
                 sqlcommand.CommandType = CommandType.StoredProcedure;
 
-                sqlcommand.Parameters.Add("@idOrder", SqlDbType.Int).Value = id;
+                sqlcommand.Parameters.Add("@corte", SqlDbType.NChar,25).Value = corte;
 
                 var dr = sqlcommand.ExecuteReader();
 
@@ -41,7 +41,8 @@ namespace ServiciosReproceso.Controllers
                 {
                     var obj = new Irregular
                     {
-                        idOrder = Convert.ToInt32(dr["idOrder"].ToString()),
+                      //  idOrder = Convert.ToInt32(dr["idOrder"].ToString()),
+                        corte = dr["orden"].ToString(),
                         talla = dr["talla"].ToString(),
                         idDefecto = Convert.ToInt32(dr["idDefecto"].ToString()),
                         idPosicion = Convert.ToInt32(dr["idPosicion"].ToString()),
@@ -72,10 +73,10 @@ namespace ServiciosReproceso.Controllers
             {
                 cn.Open();
 
-                var command = new SqlCommand("spdSaveIrregulares", cn);
+                var command = new SqlCommand("spdSaveIrregularesCorteCliente", cn);
                 command.CommandType = CommandType.StoredProcedure;
 
-                command.Parameters.Add("@idOrder", SqlDbType.Int).Value = data.idOrder;
+                command.Parameters.Add("@corte", SqlDbType.NChar,25).Value = data.corte;
                 command.Parameters.Add("@idDefecto", SqlDbType.Int).Value = data.idDefecto;
                 command.Parameters.Add("@idPosicion", SqlDbType.Int).Value = data.idPosicion;
                 command.Parameters.Add("@talla", SqlDbType.NChar,15).Value = data.talla;
@@ -107,10 +108,10 @@ namespace ServiciosReproceso.Controllers
             {
                 cn.Open();
 
-                var command = new SqlCommand("spdDeleteIrregulares", cn);
+                var command = new SqlCommand("spdDeleteIrregularesCorteCliente", cn);
                 command.CommandType = CommandType.StoredProcedure;
 
-                command.Parameters.Add("@idOrder", SqlDbType.Int).Value = data.idOrder;
+                command.Parameters.Add("@corte", SqlDbType.NChar,25).Value = data.corte;
                 command.Parameters.Add("@idDefecto", SqlDbType.Int).Value = data.idDefecto;
                 command.Parameters.Add("@idPosicion", SqlDbType.Int).Value = data.idPosicion;
                 command.Parameters.Add("@talla", SqlDbType.NChar,15).Value = data.talla;

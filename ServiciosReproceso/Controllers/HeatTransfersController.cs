@@ -39,7 +39,7 @@ namespace ServiciosReproceso.Controllers
                         estilo = dr["estilo"].ToString(),
                         color = dr["color"].ToString(),
                         disponible = Convert.ToInt32(dr["unidades"].ToString()),
-                        // uniTranferencia = 0
+                        uniTransferencia = 0
 
                     };
 
@@ -75,10 +75,10 @@ namespace ServiciosReproceso.Controllers
                        
                         corte = dr["corte"].ToString(),
                         estilo = dr["estilo"].ToString(),
-                        color = dr["color"].ToString(),
-                      
+                        color = dr["color"].ToString(),                    
                         disponible = Convert.ToInt32(dr["Unidades"].ToString()),
-                      
+                        uniTransferencia = 0
+
                     };
 
                     list.Add(obj);
@@ -108,7 +108,7 @@ namespace ServiciosReproceso.Controllers
                     command.CommandType = CommandType.StoredProcedure;
 
                     command.Parameters.Add("@corteParam", SqlDbType.NVarChar).Value = data.corte;
-                    command.Parameters.Add("@unidadesParam", SqlDbType.Int).Value = data.unidades;
+                    command.Parameters.Add("@unidadesParam", SqlDbType.Int).Value = data.uniTransferencia;
 
                     command.ExecuteNonQuery();
 
@@ -124,7 +124,7 @@ namespace ServiciosReproceso.Controllers
         }
 
         /// <summary>
-        /// r3gistro de uniadades dañadas en heat transfer
+        /// r3gistro de unidades dañadas en heat transfer
         /// </summary>
         /// <param name="data"></param>
         /// <param name="id"></param>
@@ -144,9 +144,17 @@ namespace ServiciosReproceso.Controllers
                     command.CommandType = CommandType.StoredProcedure;
 
                     command.Parameters.Add("@corteParam", SqlDbType.NVarChar).Value = data.corte;
-                    command.Parameters.Add("@unidadesParam", SqlDbType.Int).Value = data.unidades;
+                    command.Parameters.Add("@unidadesParam", SqlDbType.Int).Value = data.uniTransferencia;
+                    command.Parameters.Add("@unidadesActualizadas", SqlDbType.Int).Direction = ParameterDirection.Output;
 
                     command.ExecuteNonQuery();
+
+                    var unidades = Convert.ToInt32(command.Parameters["@unidadesActualizadas"].Value.ToString());
+
+                    if (unidades<data.uniTransferencia)
+                    {
+                        return unidades.ToString();
+                    }
 
                     return "Ok";
                 }
@@ -154,7 +162,7 @@ namespace ServiciosReproceso.Controllers
             catch (Exception ex)
             {
                 Console.Write(ex.Message);
-                return ex.Message;
+                return "error";//ex.Message;
             }
 
         }
@@ -181,7 +189,7 @@ namespace ServiciosReproceso.Controllers
                     command.CommandType = CommandType.StoredProcedure;
 
                     command.Parameters.Add("@corteParam", SqlDbType.NVarChar).Value = data.corte;
-                    command.Parameters.Add("@unidadesParam", SqlDbType.Int).Value = data.unidades;
+                    command.Parameters.Add("@unidadesParam", SqlDbType.Int).Value = data.uniTransferencia;
 
                     command.ExecuteNonQuery();
 

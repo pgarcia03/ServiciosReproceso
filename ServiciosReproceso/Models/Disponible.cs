@@ -13,6 +13,6 @@ namespace ServiciosReproceso.Models
         public string color { get; set; }
         public int unidadesCorte{ get; set; }
         public int disponible { get; set; }
-        public int uniTranferencia { get; set; }
+        public int uniTransferencia { get; set; }
     }
 }

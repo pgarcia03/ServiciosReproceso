@@ -137,7 +137,6 @@
     <Compile Include="Models\Reproceso.cs" />
     <Compile Include="Models\ReprocesoDet.cs" />
     <Compile Include="Models\ReprocesoLavado.cs" />
-    <Compile Include="Models\ReprocesoPlancha.cs" />
     <Compile Include="Models\Usuario.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

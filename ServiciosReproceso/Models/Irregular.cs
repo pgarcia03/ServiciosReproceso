@@ -22,5 +22,9 @@ namespace ServiciosReproceso.Models
         public string defecto { get; set; }
         public string posicion { get; set; }
 
+        //nuevo campo
+        public string corte { get; set; }
+
+
     }
 }

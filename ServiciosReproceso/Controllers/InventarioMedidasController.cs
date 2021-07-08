@@ -44,7 +44,7 @@ namespace ServiciosReproceso.Controllers
                     command.Parameters.Add("@estiloParam", SqlDbType.NChar,15).Value = data.estilo;
                     command.Parameters.Add("@colorParam", SqlDbType.NChar,15).Value = data.color;
                     command.Parameters.Add("@unidadesCorteParam", SqlDbType.Int).Value = data.unidadesCorte;
-                    command.Parameters.Add("@unidadesTransferenciaParam", SqlDbType.Int).Value = data.uniTranferencia;
+                    command.Parameters.Add("@unidadesTransferenciaParam", SqlDbType.Int).Value = data.uniTransferencia;
 
                     command.ExecuteNonQuery();
 
@@ -76,7 +76,7 @@ namespace ServiciosReproceso.Controllers
                     command.Parameters.Add("@corteParam", SqlDbType.NChar, 15).Value = data.corte;
                     command.Parameters.Add("@estiloParam", SqlDbType.NChar, 15).Value = data.estilo;
                     command.Parameters.Add("@colorParam", SqlDbType.NChar, 15).Value = data.color;
-                    command.Parameters.Add("@unidadesParam", SqlDbType.Int).Value = data.uniTranferencia;
+                    command.Parameters.Add("@unidadesParam", SqlDbType.Int).Value = data.uniTransferencia;
 
                     command.ExecuteNonQuery();
 

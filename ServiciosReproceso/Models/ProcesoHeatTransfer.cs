@@ -8,6 +8,6 @@ namespace ServiciosReproceso.Models
     public class ProcesoHeatTransfer
     {
         public string corte { get; set; }
-        public int unidades { get; set; }
+        public int uniTransferencia { get; set; }
     }
 }

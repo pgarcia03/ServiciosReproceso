@@ -76,7 +76,7 @@ namespace ServiciosReproceso.Controllers
                         color = dr["tolerancia"].ToString(),
                         disponible = Convert.ToInt32(dr["unidades"].ToString()),
                         //disponible = Convert.ToInt32(dr["disponible"].ToString()),
-                        uniTranferencia = 0
+                        uniTransferencia = 0
 
                     };
 

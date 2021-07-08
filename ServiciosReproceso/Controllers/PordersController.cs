@@ -22,7 +22,7 @@ namespace ServiciosReproceso.Controllers
             {
                 cn.Open(); 
 
-                var sqlcommand = new SqlCommand("spdBuscarPo", cn);
+                var sqlcommand = new SqlCommand("spdBuscarPoCliente", cn);
                 sqlcommand.CommandType = CommandType.StoredProcedure;
 
                 sqlcommand.Parameters.Add("@porder", SqlDbType.NChar, 15).Value = pre;
@@ -34,7 +34,7 @@ namespace ServiciosReproceso.Controllers
                 {
                     var obj = new Porder
                     {
-                        idCorte = Convert.ToInt32(dr["Id_Order"].ToString()),
+                        //idCorte = Convert.ToInt32(dr["Id_Order"].ToString()),
                         corte = dr["Porder"].ToString(),
                         estilo = dr["Style"].ToString(),
                         cantidad = Convert.ToInt32(dr["Quantity"].ToString()),
@@ -94,7 +94,7 @@ namespace ServiciosReproceso.Controllers
         //  GET: api/Porders/5
         [HttpGet]
         [Route("api/porders/getTallas")]
-        public List<Porder> Get(int id)
+        public List<Porder> Get(string corte,int i=1)
         {
 
             var conectionString = CreadorConection.Creador(CreadorConection.Auditoria).conectionstring();
@@ -104,10 +104,10 @@ namespace ServiciosReproceso.Controllers
             {
                 cn.Open();
 
-                var sqlcommand = new SqlCommand("spdGetTallasUniXIdCorte", cn);
+                var sqlcommand = new SqlCommand("spdGetTallasUniXCorteCliente", cn);
                 sqlcommand.CommandType = CommandType.StoredProcedure;
 
-                sqlcommand.Parameters.Add("@id", SqlDbType.Int).Value = id;
+                sqlcommand.Parameters.Add("@corte", SqlDbType.NChar,25).Value = corte;
 
                 var dr = sqlcommand.ExecuteReader();
 
