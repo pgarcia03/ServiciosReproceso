@@ -111,6 +111,7 @@
     <Compile Include="Controllers\HeatTransfersController.cs" />
     <Compile Include="Controllers\InventarioMedidasController.cs" />
     <Compile Include="Controllers\IrregularesController.cs" />
+    <Compile Include="Controllers\IrregularesCrudoController.cs" />
     <Compile Include="Controllers\LoginsController.cs" />
     <Compile Include="Controllers\PordersController.cs" />
     <Compile Include="Controllers\PosicionsController.cs" />
